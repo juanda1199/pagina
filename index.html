@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<p>El dia de hoy el ingeniero @Roger va a subir un nuevo curso con su alumno @Juan de expresiones regulares.</p>
+<script>
+	window.onload = () =>{
+
+		const expresion = /@[A-z]+/g;
+		const p = document.querySelector('p');
+		let text= p.innerText;
+
+		const result = text.match(expresion);
+		console.log(result);
+
+		result.forEach(value => {
+        text = text.replace(value,`<a href="https://expresiones.com/u/ ${value}"> ${value}</a>`);
+        });
+
+        p.innerHtml = text; 
+
+    }; 
+
+</script>
+</body>
+</html>
