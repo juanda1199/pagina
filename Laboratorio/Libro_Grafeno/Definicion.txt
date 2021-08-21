@@ -1,0 +1,7 @@
+El grafeno es una de las formas alotrópicas del carbono. Es un material bidimensional, donde cada átomo de carbono 
+se encuentra unido a otros tres átomos de carbono mediante enlaces sp2 para formar una lámina plana con una estructura 
+semejante a la de un panal de abeja, lo que le confiere una elevada conductividad y gran resistencia mecánica en el plano.
+Éste se puede encontrar de forma estable suspendido en un líquido, depositado sobre un sustrato no cristalino y 
+como membranas.
+
+referencia: J. (2020, 3 mayo). Qué es el grafeno: definición y descripción. Applynano Solutions. https://applynano.com/que-es-el-grafeno-definicion-y-descripcion/

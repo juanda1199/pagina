@@ -1,0 +1,165 @@
+-- ---
+-- Table 'Order'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `Order`;
+		
+CREATE TABLE `Order` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `user` INTEGER NULL DEFAULT NULL,
+  `date_order` INTEGER NULL DEFAULT NULL,
+  `order_total` INTEGER NULL DEFAULT NULL,
+  `User` INTEGER NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'OrderDetail'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `OrderDetail`;
+		
+CREATE TABLE `OrderDetail` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `price` INTEGER NOT NULL DEFAULT NULL,
+  `quantity` INTEGER NULL DEFAULT NULL,
+  `iva` INTEGER NULL DEFAULT NULL,
+  `subtotal` INTEGER NULL DEFAULT NULL,
+  `product` INTEGER NULL DEFAULT NULL,
+  `order` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'User'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `User`;
+		
+CREATE TABLE `User` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `document_type` INTEGER NULL DEFAULT NULL,
+  `document` INTEGER NULL DEFAULT NULL,
+  `address` VARCHAR(20) NULL DEFAULT NULL,
+  `name` VARCHAR(50) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'Payment'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `Payment`;
+		
+CREATE TABLE `Payment` (
+  `id` INTEGER NULL DEFAULT NULL,
+  `payment_type` INTEGER NULL DEFAULT NULL,
+  `payment_total` INTEGER NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'payment_order'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `payment_order`;
+		
+CREATE TABLE `payment_order` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `total_payment` INTEGER NULL DEFAULT NULL,
+  `subtotal_payment` INTEGER NULL DEFAULT NULL,
+  `payment` INTEGER NULL DEFAULT NULL,
+  `order` INTEGER NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'Product'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `Product`;
+		
+CREATE TABLE `Product` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `name` VARCHAR(50) NULL DEFAULT NULL,
+  `stock` INTEGER NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'Notification'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `Notification`;
+		
+CREATE TABLE `Notification` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `User` INTEGER NULL DEFAULT NULL,
+  `resume` VARCHAR(500) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'Document_type'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `Document_type`;
+		
+CREATE TABLE `Document_type` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `name` VARCHAR(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'Shipment'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `Shipment`;
+		
+CREATE TABLE `Shipment` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `shipment_date` DATE NULL DEFAULT NULL,
+  `received_date` INTEGER NULL DEFAULT NULL,
+  `id_Order` INTEGER NULL DEFAULT NULL,
+  `id_City` INTEGER NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'City'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `City`;
+		
+CREATE TABLE `City` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `name` VARCHAR(20) NULL DEFAULT NULL,
+  `state` VARCHAR(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Foreign Keys 
+-- ---
+
+ALTER TABLE `Order` ADD FOREIGN KEY (User) REFERENCES `User` (`id`);
+ALTER TABLE `OrderDetail` ADD FOREIGN KEY (product) REFERENCES `Product` (`id`);
+ALTER TABLE `OrderDetail` ADD FOREIGN KEY (order) REFERENCES `Order` (`id`);
+ALTER TABLE `User` ADD FOREIGN KEY (document_type) REFERENCES `Document_type` (`id`);
+ALTER TABLE `payment_order` ADD FOREIGN KEY (payment) REFERENCES `Payment` (`id`);
+ALTER TABLE `payment_order` ADD FOREIGN KEY (order) REFERENCES `Order` (`id`);
+ALTER TABLE `Notification` ADD FOREIGN KEY (User) REFERENCES `User` (`id`);
+ALTER TABLE `Shipment` ADD FOREIGN KEY (id_Order) REFERENCES `Order` (`id`);
+ALTER TABLE `Shipment` ADD FOREIGN KEY (id_City) REFERENCES `City` (`id`);
+
